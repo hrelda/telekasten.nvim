@@ -1280,8 +1280,12 @@ local function InsertLink(opts)
             actions.select_default:replace(function()
                 actions.close(prompt_bufnr)
                 local selection = action_state.get_selected_entry()
+                local path = action_state.get_current_line()
+                if selection then
+                    path = selection.filename or selection.value
+                end
                 local pinfo = Pinfo:new({
-                    filepath = selection.filename or selection.value,
+                    filepath = path,
                     opts,
                 })
                 vim.api.nvim_put(
