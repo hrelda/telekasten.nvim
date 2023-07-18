@@ -2209,6 +2209,11 @@ local function FollowLink(opts)
                     end
                 end
 
+                if opts.no_picker_if_exists == true and pinfo.fexists then
+                    vim.cmd("e " .. pinfo.filepath)
+                    return
+                end
+
                 picker()
             end)
         end
